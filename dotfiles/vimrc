@@ -1,0 +1,65 @@
+" if vim-plug is not installed, automatically install it
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master.plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" define the plugins that vim-plug should manage
+call plug#begin()
+Plug 'altercation/vim-colors-solarized'
+Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Valloric/YouCompleteMe'
+call plug#end()
+
+" colors and syntax
+syntax enable
+set background=dark
+colorscheme solarized
+
+" use the solarized theme for vim-airline
+" for the airline capable fonts, use something like Cascadia Code PL
+let g:airline#extensions#tabline#enabled=1
+let g:airline_themes='solarized'
+let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts=1
+
+" spaces & tabs
+set tabstop=4
+set softtabstop=4
+set expandtab
+set shiftwidth=4
+set modelines=3
+set modeline
+filetype indent on
+filetype plugin on
+set autoindent
+set smartindent
+set cindent
+autocmd FileType javascript,yaml,yaml.ansible setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+" UI configuration
+set cursorline
+set wildmenu
+set showmatch
+set number
+
+" show tabs and trailing spaces
+set list
+" in case you want to have EOL displayed, use the following line
+" set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵
+set listchars=tab:␉·,trail:␠,nbsp:⎵
+
+" YouCompleteMe settings
+" set this to the version of java you want to run (if any)
+" let g:ycm_java_binary_path = "/usr/lib64/openjdk-11/bin/java"
+
+" backups
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*
+set writebackup
